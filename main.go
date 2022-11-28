@@ -2,15 +2,22 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/refoscodoc/go-gin-grom-api/controllers"
+	"github.com/refoscodoc/go-gin-grom-api/services"
 )
 
 func main() {
 	r := gin.Default()
+	services.ConnectDatabase()
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "Hey there"})
-	})
+	r.GET("/guitars", controllers.FindGuitars)
+	r.POST("/guitars", controllers.CreateGuitar)
+	// r.GET("/guitars/:id", controllers.FindGuitar)
+	// r.PATCH("/guitars/:id", controllers.UpdateGuitar)
+	// r.DELETE("/guitars/:id", controllers.DeleteGuitar)
 
-	r.Run()
+	err := r.Run()
+	if err != nil {
+		return
+	}
 }

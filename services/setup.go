@@ -1,7 +1,8 @@
 package services
 
 import (
-	_ "gorm.io/driver/sqlite"
+	"github.com/refoscodoc/go-gin-grom-api/models"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +15,7 @@ func ConnectDatabase() {
 		panic("Failed to connect to db")
 	}
 
-	err = database.AutoMigrate(&Guitar{})
+	err = database.AutoMigrate(&models.Guitar{})
 	if err != nil {
 		return
 	}
