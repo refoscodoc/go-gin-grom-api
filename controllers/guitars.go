@@ -16,7 +16,7 @@ func FindGuitars(c *gin.Context) {
 }
 
 func CreateGuitar(c *gin.Context) {
-	var input dtos.CreateGuitar
+	var input dtos.CreateGuitarInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
